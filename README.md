@@ -1,6 +1,6 @@
 Project CNG Hotel
 
-*Member:
+*Members:
 1. Nguyễn Phú Cường
 2. Trần Phát Đạt
 3. Nguyễn Ngọc Trâm
