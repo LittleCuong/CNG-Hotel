@@ -15,6 +15,48 @@
     font-size: 40px;
 }
 
+.room-container {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 200ms linear;
+}
+
 .room-container:hover {
-    background-color: aliceblue;
+    background-color: #EEF1F2;
+}
+
+.room-image--contain {
+    width: 100%;
+}
+
+.room-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.room-name--section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 0;
+    transform: translateY(20px);
+    transition: all 200ms linear;
+    opacity: 0;
+}
+
+.room-name {
+    font-size: 16px;
+}
+
+.room-order--btn {
+    background-color: rgba(0, 0, 1, 0.1);
+    transition: all 200ms linear;
+}
+
+.room-container:hover .room-name--section {
+    transform: translateX(0px);
+    opacity: 1;
 }

@@ -213,6 +213,8 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="image\background.jpg" />
     <Content Include="image\default_background.jpg" />
+    <Content Include="image\doubleroom.jpg" />
+    <Content Include="image\new_background.jpg" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
