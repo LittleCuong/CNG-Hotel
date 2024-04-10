@@ -72,16 +72,10 @@
                 </div>
             </div>
         </div>
-        <div class="image-container" style="height: 300px;">
-            <img src="image/new_background.jpg" style="object-fit: cover; width: 100%; height: 100%;"/>
-      
-            <h3 class="image-container--header">Welcome to CNG Hotel</h3>
-
-        </div>
-        <div class="container body-content">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
+        <hr />
+        <div class="container body-content">
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
             </footer>

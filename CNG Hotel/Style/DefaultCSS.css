@@ -52,11 +52,57 @@
 }
 
 .room-order--btn {
-    background-color: rgba(0, 0, 1, 0.1);
-    transition: all 200ms linear;
 }
 
 .room-container:hover .room-name--section {
     transform: translateX(0px);
     opacity: 1;
+}
+/* ----------- Login form ------------ */
+.login-section, .register-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 12px;
+}
+
+.login-container, .register-container {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #F6F8FA;
+    border: 1px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input-custom {
+    max-width: unset !important;
+}
+
+.remember-container {
+    padding: 0 15px;
+}
+
+.btn-custom {
+    border-color: rgba(0,0,0,0.1);
+    border-radius: 4px;
+    transition: all 200ms linear;
+}
+
+.btn-custom:hover {
+   background-color: #f6a6a6 !important;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 6px 0;
 }
