@@ -52,12 +52,24 @@
 }
 
 .room-order--btn {
+    padding: 4px 4px;
+    border-width: 1px;
+    border-radius: 4px;
+    outline: none;
+    transition: all 0.2s linear;
 }
+
+.room-order--btn:hover {
+    cursor: pointer;
+    background-color: #f6a6a6;
+}
+
 
 .room-container:hover .room-name--section {
     transform: translateX(0px);
     opacity: 1;
 }
+
 /* ----------- Login form ------------ */
 .login-section, .register-section {
     display: flex;
@@ -105,4 +117,5 @@
 .login-btn {
     width: 100%;
     padding: 6px 0;
+    border: none;
 }

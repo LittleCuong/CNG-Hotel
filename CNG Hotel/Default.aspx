@@ -16,7 +16,7 @@
                     <span id="roomName" runat="server" class="room-name"></span>
                     <span style="font-size: 12px;">Phòng đôi</span>
                 </div>
-                <button class="btn-custom room-order--btn">Đặt ngay</button>
+                <button class="room-order--btn">Đặt ngay</button>
             </div>
         </div>
         <div class="col-md-4 room-container">
@@ -25,10 +25,10 @@
             </div>
             <div class="room-name--section">
                 <div style="display: flex; flex-direction: column;">
-                    <span class="room-name">The Chairman's Suite</span>
+                    <span class="room-name">Phòng The Chairman's Suite</span>
                     <span style="font-size: 12px;">Phòng đôi</span>
                 </div>
-                <button class="btn-custom room-order--btn">Đặt ngay</button>
+                <button class="room-order--btn">Đặt ngay</button>
             </div>
         </div>
     </div>
