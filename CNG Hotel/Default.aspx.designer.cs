@@ -13,12 +13,30 @@ namespace CNG_Hotel {
     public partial class _Default {
         
         /// <summary>
-        /// roomName control.
+        /// singleRoomRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl roomName;
+        protected global::System.Web.UI.WebControls.Repeater singleRoomRepeater;
+        
+        /// <summary>
+        /// doubleRoomRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater doubleRoomRepeater;
+        
+        /// <summary>
+        /// suiteRoomRepeater control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater suiteRoomRepeater;
     }
 }

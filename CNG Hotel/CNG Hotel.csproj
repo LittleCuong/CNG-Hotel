@@ -212,6 +212,7 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="image\background.jpg" />
+    <Content Include="image\beach_background.jpg" />
     <Content Include="image\default_background.jpg" />
     <Content Include="image\doubleroom.jpg" />
     <Content Include="image\new_background.jpg" />
@@ -382,6 +383,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="clsDatabase.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

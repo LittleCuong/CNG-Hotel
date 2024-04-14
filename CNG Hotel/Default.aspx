@@ -1,36 +1,85 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CNG_Hotel._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-     <div class="image-container" style="height: 300px;">
-        <img src="../image/new_background.jpg" style="object-fit: cover; width: 100%; height: 100%;"/>
-        <h3 class="image-container--header">Welcome to CNG Hotel</h3>
-    </div>
+    <%--<div class="image-container" style="height: 400px; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../image/beach_background.jpg); background-position: center;">--%>
+        <%--<img src="../image/beach_background.jpg" style="object-fit: cover; width: 100%; height: 100%; object-position: center; "/>--%>
+        <%--<h3 class="image-container--header">Welcome to CNG Hotel</h3>--%>
+    <%--</div>--%>
     <div class="container body-content">
+        <h3 class="room-name--header">Phòng đơn</h3>
         <div class="row" style="margin-top: 4px;">
-        <div class="col-md-4 room-container">
-            <div class="room-image--contain">
-                <img src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
-            </div>
-            <div class="room-name--section">
-                <div style="display: flex; flex-direction: column;">
-                    <span id="roomName" runat="server" class="room-name"></span>
-                    <span style="font-size: 12px;">Phòng đôi</span>
-                </div>
-                <button class="room-order--btn">Đặt ngay</button>
-            </div>
+            <asp:Repeater ID="singleRoomRepeater" runat="server">
+                <ItemTemplate>
+                    <div class="col-md-4 custom-container">
+                        <div class="room-container">
+                            <div class="room-image--contain">
+                                <img id="roomImage" src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
+                            </div>
+                            <div class="room-name--section">
+                                <div style="display: flex; flex-direction: column;">
+                                    <span id="roomName" runat="server" class="room-name">
+                                        <asp:Label Text='<%# Eval("Room_Name") %>' runat="server" />
+                                    </span>
+                                    <span id="roomType" style="font-size: 12px;">
+                                        <asp:Label Text='<%# Eval("Type_Name") %>' runat="server" />
+                                    </span>
+                                </div>
+                                <button class="room-order--btn">Đặt ngay</button>
+                            </div>
+                        </div>
+                    </div>               
+                </ItemTemplate>
+            </asp:Repeater>          
         </div>
-        <div class="col-md-4 room-container">
-            <div class="room-image--contain">
-                <img src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
-            </div>
-            <div class="room-name--section">
-                <div style="display: flex; flex-direction: column;">
-                    <span class="room-name">Phòng The Chairman's Suite</span>
-                    <span style="font-size: 12px;">Phòng đôi</span>
-                </div>
-                <button class="room-order--btn">Đặt ngay</button>
-            </div>
+        <h3 class="room-name--header">Phòng đôi</h3>
+        <div class="row" style="margin-top: 4px;">
+            <asp:Repeater ID="doubleRoomRepeater" runat="server">
+                <ItemTemplate>
+                    <div class="col-md-4 custom-container">
+                        <div class="room-container">
+                            <div class="room-image--contain">
+                                <img id="roomImage" src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
+                            </div>
+                            <div class="room-name--section">
+                                <div style="display: flex; flex-direction: column;">
+                                    <span id="roomName" runat="server" class="room-name">
+                                        <asp:Label Text='<%# Eval("Room_Name") %>' runat="server" />
+                                    </span>
+                                    <span id="roomType" style="font-size: 12px;">
+                                        <asp:Label Text='<%# Eval("Type_Name") %>' runat="server" />
+                                    </span>
+                                </div>
+                                <button class="room-order--btn">Đặt ngay</button>
+                            </div>
+                        </div>
+                    </div>               
+                </ItemTemplate>
+            </asp:Repeater>          
         </div>
-    </div>
+        <h3 class="room-name--header">Phòng hạng sang</h3>
+        <div class="row" style="margin-top: 4px;">
+            <asp:Repeater ID="suiteRoomRepeater" runat="server">
+                <ItemTemplate>
+                    <div class="col-md-4 custom-container">
+                        <div class="room-container">
+                            <div class="room-image--contain">
+                                <img id="roomImage" src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
+                            </div>
+                            <div class="room-name--section">
+                                <div style="display: flex; flex-direction: column;">
+                                    <span id="roomName" runat="server" class="room-name">
+                                        <asp:Label Text='<%# Eval("Room_Name") %>' runat="server" />
+                                    </span>
+                                    <span id="roomType" style="font-size: 12px;">
+                                        <asp:Label Text='<%# Eval("Type_Name") %>' runat="server" />
+                                    </span>
+                                </div>
+                                <button class="room-order--btn">Đặt ngay</button>
+                            </div>
+                        </div>
+                    </div>               
+                </ItemTemplate>
+            </asp:Repeater>          
+        </div>
     </div>
 </asp:Content>
