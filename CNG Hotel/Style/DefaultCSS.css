@@ -11,7 +11,7 @@
 }
 
 .body-content {
-   
+   margin-top: 20px;
 }
 
 .custom-container {
@@ -47,7 +47,7 @@
     min-height: 230px;
     background-color: #fff;
     cursor: pointer;
-    border-radius: 4px;
+    /*border-radius: 4px;*/
     transition: all 200ms linear;
 }
 
@@ -58,31 +58,34 @@
 
 .room-image--contain {
     width: 100%;
+    height: 400px;
 }
 
 .room-image {
     width: 100%;
     height: 100%;
-    padding: 6px;
+    /*padding: 6px;*/
     border-radius: 4px;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .room-name--section {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
-    padding: 6px 6px;
+    padding: 6px 0px;
     /*transform: translateY(20px);
     opacity: 0;*/
     transition: all 200ms linear;
 }
 
 .room-name {
-    font-size: 16px;
+    font-size: 26px;
 }
 
 .room-order--btn {
+    margin-top: 16px;
     padding: 4px 4px;
     border-width: 1px;
     border-radius: 4px;

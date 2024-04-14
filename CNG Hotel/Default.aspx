@@ -21,7 +21,12 @@
                                         <asp:Label Text='<%# Eval("Room_Name") %>' runat="server" />
                                     </span>
                                     <span id="roomType" style="font-size: 12px;">
-                                        <asp:Label Text='<%# Eval("Type_Name") %>' runat="server" />
+                                        <i style="margin: 0 2px 0 0px;" class="fa-solid fa-bed"></i>
+                                        <asp:Label Text='<%# Eval("Type_Name")%>' runat="server" />
+                                        <i style="margin: 0 2px 0 20px;" class="fa-solid fa-users"></i>
+                                        <asp:Label Text='<%# Eval("Type_Size")%>' runat="server" />
+                                        <i style="margin: 0 2px 0 20px;" class="fa-solid fa-couch"></i>
+                                        <asp:Label Text='<%# Eval("Type_Details")%>' runat="server" />
                                     </span>
                                 </div>
                                 <button class="room-order--btn">Đặt ngay</button>
@@ -41,12 +46,17 @@
                                 <img id="roomImage" src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
                             </div>
                             <div class="room-name--section">
-                                <div style="display: flex; flex-direction: column;">
+                                  <div style="display: flex; flex-direction: column;">
                                     <span id="roomName" runat="server" class="room-name">
                                         <asp:Label Text='<%# Eval("Room_Name") %>' runat="server" />
                                     </span>
                                     <span id="roomType" style="font-size: 12px;">
-                                        <asp:Label Text='<%# Eval("Type_Name") %>' runat="server" />
+                                        <i style="margin: 0 2px 0 0px;" class="fa-solid fa-bed"></i>
+                                        <asp:Label Text='<%# Eval("Type_Name")%>' runat="server" />
+                                        <i style="margin: 0 2px 0 20px;" class="fa-solid fa-users"></i>
+                                        <asp:Label Text='<%# Eval("Type_Size")%>' runat="server" />
+                                        <i style="margin: 0 2px 0 20px;" class="fa-solid fa-couch"></i>
+                                        <asp:Label Text='<%# Eval("Type_Details")%>' runat="server" />
                                     </span>
                                 </div>
                                 <button class="room-order--btn">Đặt ngay</button>
@@ -66,15 +76,20 @@
                                 <img id="roomImage" src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
                             </div>
                             <div class="room-name--section">
-                                <div style="display: flex; flex-direction: column;">
+                                  <div style="display: flex; flex-direction: column;">
                                     <span id="roomName" runat="server" class="room-name">
                                         <asp:Label Text='<%# Eval("Room_Name") %>' runat="server" />
                                     </span>
                                     <span id="roomType" style="font-size: 12px;">
-                                        <asp:Label Text='<%# Eval("Type_Name") %>' runat="server" />
+                                        <i style="margin: 0 2px 0 0px;" class="fa-solid fa-bed"></i>
+                                        <asp:Label Text='<%# Eval("Type_Name")%>' runat="server" />
+                                        <i style="margin: 0 2px 0 20px;" class="fa-solid fa-users"></i>
+                                        <asp:Label Text='<%# Eval("Type_Size")%>' runat="server" />
+                                        <i style="margin: 0 2px 0 20px;" class="fa-solid fa-couch"></i>
+                                        <asp:Label Text='<%# Eval("Type_Details")%>' runat="server" />
                                     </span>
                                 </div>
-                                <button class="room-order--btn">Đặt ngay</button>
+                                <button class="room-order--btn">Book now</button>
                             </div>
                         </div>
                     </div>               

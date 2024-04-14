@@ -63,7 +63,7 @@ namespace CNG_Hotel
             try
             {
                 clsDatabase.OpenConnection();
-                SqlCommand command = new SqlCommand("select R.Room_ID, R.Room_Name, R.Room_Status, T.Type_Name, T.Type_Details from Room R INNER JOIN Type T ON R.Type_ID = T.Type_ID where T.Type_Name = 'single';", clsDatabase.connection);
+                SqlCommand command = new SqlCommand("select R.Room_ID, R.Room_Name, R.Room_Status, T.Type_Name, T.Type_Size, T.Type_Details from Room R INNER JOIN Type T ON R.Type_ID = T.Type_ID where T.Type_Name = 'single';", clsDatabase.connection);
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 clsDatabase.CloseConnection();
                 adapter.Fill(table);
@@ -81,7 +81,7 @@ namespace CNG_Hotel
             try
             {
                 clsDatabase.OpenConnection();
-                SqlCommand command = new SqlCommand("select R.Room_ID, R.Room_Name, R.Room_Status, T.Type_Name from Room R INNER JOIN Type T ON R.Type_ID = T.Type_ID where T.Type_Name = 'double';", clsDatabase.connection);
+                SqlCommand command = new SqlCommand("select R.Room_ID, R.Room_Name, R.Room_Status, T.Type_Name, T.Type_Size, T.Type_Details from Room R INNER JOIN Type T ON R.Type_ID = T.Type_ID where T.Type_Name = 'double';", clsDatabase.connection);
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 clsDatabase.CloseConnection();
                 adapter.Fill(table);
@@ -99,7 +99,7 @@ namespace CNG_Hotel
             try
             {
                 clsDatabase.OpenConnection();
-                SqlCommand command = new SqlCommand("select R.Room_ID, R.Room_Name, R.Room_Status, T.Type_Name from Room R INNER JOIN Type T ON R.Type_ID = T.Type_ID where T.Type_Name = 'suite';", clsDatabase.connection);
+                SqlCommand command = new SqlCommand("select R.Room_ID, R.Room_Name, R.Room_Status, T.Type_Name, T.Type_Size, T.Type_Details from Room R INNER JOIN Type T ON R.Type_ID = T.Type_ID where T.Type_Name = 'suite';", clsDatabase.connection);
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 clsDatabase.CloseConnection();
                 adapter.Fill(table);
