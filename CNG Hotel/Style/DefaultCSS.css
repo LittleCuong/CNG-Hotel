@@ -16,6 +16,11 @@
 
 .custom-container {
     margin-bottom: 6px;
+    transition: all 0.2s linear;
+}
+
+.custom-container:hover {
+    box-shadow: 1px 12px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .image-container {
@@ -45,15 +50,13 @@
     flex-direction: column;
     margin: 0 0 4px 0;
     min-height: 230px;
-    background-color: #fff;
+    /*background-color: #fff;*/
     cursor: pointer;
     /*border-radius: 4px;*/
-    transition: all 200ms linear;
+    /*transition: all 200ms linear;*/
 }
 
 .room-container:hover {
-    transform: scale(1.02);
-    box-shadow: 1px 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .room-image--contain {
@@ -75,8 +78,6 @@
     align-items: flex-start;
     justify-content: space-between;
     padding: 6px 0px;
-    /*transform: translateY(20px);
-    opacity: 0;*/
     transition: all 200ms linear;
 }
 
@@ -100,13 +101,6 @@
 
 
 .room-container:hover .room-name--section {
-    /*transform: translateX(0px);
-    opacity: 1;*/
-
-}
-
-.room-container:hover {
-   box-shadow: 1px 1px rgba(0,0,0,0.1);
 }
 
 /* ----------- Login form ------------ */

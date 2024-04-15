@@ -15,17 +15,17 @@
                     </asp:PlaceHolder>
                     <div class="form-group">
                         <div class="input-container">
-                            <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-3 control-label">Email</asp:Label>
+                            <asp:Label runat="server" AssociatedControlID="Number" CssClass="col-md-12 control-label">Phone number</asp:Label>
                             <div class="col-md-12">
-                                <asp:TextBox runat="server" ID="Email" CssClass="form-control input-custom" TextMode="Email"/>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
-                                    CssClass="text-danger" ErrorMessage="The email field is required." />
+                                <asp:TextBox runat="server" ID="Number" CssClass="form-control input-custom" TextMode="Phone"/>
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="Number"
+                                    CssClass="text-danger" ErrorMessage="The phone number field is required." />
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-container">
-                            <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-3 control-label">Password</asp:Label>
+                            <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-12 control-label">Password</asp:Label>
                             <div class="col-md-12">
                                 <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control input-custom" />
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="The password field is required." />

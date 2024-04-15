@@ -1,10 +1,44 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CNG_Hotel._Default" %>
 
+
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <%--<div class="image-container" style="height: 400px; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../image/beach_background.jpg); background-position: center;">--%>
-        <%--<img src="../image/beach_background.jpg" style="object-fit: cover; width: 100%; height: 100%; object-position: center; "/>--%>
-        <%--<h3 class="image-container--header">Welcome to CNG Hotel</h3>--%>
-    <%--</div>--%>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function orderRoom(roomId) {
+            var url = 'Account/PlaceRoom.aspx?roomId=' + roomId;
+            window.location.href = url;
+            //if (localStorage.getItem('userId')) {
+                
+            //} else {
+                
+            //}         
+        }
+
+        function handleOrderRoom(data)
+        {
+            $.ajax({
+                    type: "POST",
+                    url: '<%= ResolveUrl("Default.aspx/OrderRoomMethod") %>',
+                    data: JSON.stringify({  }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        console.log(response)
+                        //if (response.d === "authenticated") {
+                        //    openConfirmModal(roomId);
+                        //} else if (response.d === "not_authenticated") {
+                        //    alert("Please log in to place an order.");
+                        //}
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error ordering room: " + error);
+                    }
+                });
+        }
+
+        
+    </script>
+
     <div class="container body-content">
         <h3 class="room-name--header">Phòng đơn</h3>
         <div class="row" style="margin-top: 4px;">
@@ -29,7 +63,10 @@
                                         <asp:Label Text='<%# Eval("Type_Details")%>' runat="server" />
                                     </span>
                                 </div>
-                                <button class="room-order--btn">Đặt ngay</button>
+                                
+                                <asp:Button ID="btnClick" runat="server" Text="Đặt ngay" CssClass="room-order--btn" OnClientClick='<%# "orderRoom(" + Eval("Room_ID") + "); return false;" %>' CommandArgument='<%# Eval("Room_ID")%>'/>                                             
+                                     
+                                <%--<button runat="server" onclick="orderBtnClick_Click" class="room-order--btn">Đặt ngay</button>--%>
                             </div>
                         </div>
                     </div>               
@@ -59,7 +96,7 @@
                                         <asp:Label Text='<%# Eval("Type_Details")%>' runat="server" />
                                     </span>
                                 </div>
-                                <button class="room-order--btn">Đặt ngay</button>
+                               <button runat="server" onclick="orderBtnClick_Click" class="room-order--btn">Đặt ngay</button>
                             </div>
                         </div>
                     </div>               
@@ -89,7 +126,7 @@
                                         <asp:Label Text='<%# Eval("Type_Details")%>' runat="server" />
                                     </span>
                                 </div>
-                                <button class="room-order--btn">Book now</button>
+                               <button runat="server" onclick="orderBtnClick_Click" class="room-order--btn">Đặt ngay</button>
                             </div>
                         </div>
                     </div>               

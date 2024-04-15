@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -34,28 +35,7 @@ namespace CNG_Hotel
                 suiteRoomRepeater.DataBind();
             }
         }
-        private void test()
-        {
-            try
-            {
-                clsDatabase.OpenConnection();
-                SqlCommand command = new SqlCommand("select * from Room;", clsDatabase.connection);
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    // Loop through the data
-                    while (reader.Read())
-                    {
-                        // Retrieve values from the reader
-                        System.Diagnostics.Debug.WriteLine("Room: " + reader["Room_Name"]);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                System.Diagnostics.Debug.WriteLine("Get data failed");
-            }
-        }
-
+       
         private DataTable getRoom()
         {
 
@@ -110,5 +90,30 @@ namespace CNG_Hotel
             }
             return table;
         }
+
+        protected void btnOrderRoom_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (User.Identity.IsAuthenticated)
+            {
+                int roomId = Convert.ToInt32(btn.CommandArgument);
+                // If logged in, open a modal to confirm the order
+                ClientScript.RegisterStartupScript(this.GetType(), "confirmModal", "<script>openConfirmModal('" + roomId + "');</script>");
+            }
+            else
+            {
+                // If not logged in, display an alert to log in
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "<script>alert('Please log in to place an order.');</script>");
+            }                
+        }
+
+
+            [WebMethod]
+            public static string OrderRoomMethod(int roomId)
+            {
+                return "Room ordered successfully";
+            }
+        
+
     }
 }
