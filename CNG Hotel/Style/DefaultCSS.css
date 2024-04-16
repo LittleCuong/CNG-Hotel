@@ -164,3 +164,48 @@
     padding: 6px 0;
     border: none;
 }
+
+/* Reservation Page */
+.reservation-input--container {
+    width: 100%;
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border-color: #b99d75;
+    border-style: solid;
+    border-width: 1px   ;
+    color: #333;
+}
+
+.reservation-input {
+    padding: 4px;
+    border-color: rgba(0,0,0,.1);
+    outline: none;
+}
+
+.date-input {
+    border: none;
+    outline: none;
+}
+
+.days-input {
+    max-width: 50px;
+    border: none;
+}
+
+.cost-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px;
+    border-bottom: 0;
+    border-right: 0;
+    border-left: 0;
+    border-style: solid; 
+    border-color: #333;
+}
+
