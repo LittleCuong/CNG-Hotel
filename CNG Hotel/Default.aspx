@@ -38,10 +38,14 @@
 
         
     </script>
-
-    <div class="container body-content">
+    <div style="height: 350px; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../image/beach_background.jpg); background-position: bottom;">
+        <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 20px 0; ">
+            <h3 style="width: 400px; margin: 0; text-align: center; font-size: 45px; color: #fff;">Boutique Private Island Resort</h3>
+        </div>
+    </div>
+    <div class="container body-content" >
         <h3 class="room-name--header">Phòng đơn</h3>
-        <div class="row" style="margin-top: 4px;">
+        <div class="row" style="margin-top: 4px;">        
             <asp:Repeater ID="singleRoomRepeater" runat="server">
                 <ItemTemplate>
                     <div class="col-md-4 custom-container">
@@ -65,16 +69,14 @@
                                 </div>
                                 
                                 <asp:Button ID="btnClick" runat="server" Text="Đặt ngay" CssClass="room-order--btn" OnClientClick='<%# "orderRoom(" + Eval("Room_ID") + "); return false;" %>' CommandArgument='<%# Eval("Room_ID")%>'/>                                             
-                                     
-                                <%--<button runat="server" onclick="orderBtnClick_Click" class="room-order--btn">Đặt ngay</button>--%>
+                              </div>
                             </div>
-                        </div>
-                    </div>               
-                </ItemTemplate>
-            </asp:Repeater>          
+                        </div>               
+                 </ItemTemplate>
+              </asp:Repeater>             
         </div>
         <h3 class="room-name--header">Phòng đôi</h3>
-        <div class="row" style="margin-top: 4px;">
+        <div class="row" style="position: relative; width: 100%; display: flex; flex-direction: row; overflow: hidden;  margin-top: 4px;">          
             <asp:Repeater ID="doubleRoomRepeater" runat="server">
                 <ItemTemplate>
                     <div class="col-md-4 custom-container">
@@ -101,10 +103,10 @@
                         </div>
                     </div>               
                 </ItemTemplate>
-            </asp:Repeater>          
+            </asp:Repeater>                       
         </div>
         <h3 class="room-name--header">Phòng hạng sang</h3>
-        <div class="row" style="margin-top: 4px;">
+        <div class="row room-container" style="position: relative; width: 100%; display: flex; flex-direction: row; overflow: hidden;  margin-top: 4px;">   
             <asp:Repeater ID="suiteRoomRepeater" runat="server">
                 <ItemTemplate>
                     <div class="col-md-4 custom-container">
@@ -131,7 +133,7 @@
                         </div>
                     </div>               
                 </ItemTemplate>
-            </asp:Repeater>          
+            </asp:Repeater>             
         </div>
     </div>
 </asp:Content>

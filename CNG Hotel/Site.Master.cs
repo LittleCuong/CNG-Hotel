@@ -70,11 +70,26 @@ namespace CNG_Hotel
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Request.Cookies["id"] != null)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Your Comment", "handleCheckLogIn();", true);            
+                System.Diagnostics.Debug.WriteLine("Logged in");              
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Your Comment", "handleCheckNotLogIn();", true);
+                System.Diagnostics.Debug.WriteLine("Not Log in");              
+            }
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+        }
+
+        private void GetUser(int userId)
+        {
+
         }
     }
 

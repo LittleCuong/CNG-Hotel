@@ -37,8 +37,8 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-        <div style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../image/beach_background.jpg); background-position: bottom;">
-            <div class="navbar" style="margin: 0 !important;">
+        <div>
+            <div class="navbar" style="margin: 0 !important; background-color: rgba(38,38,38, 0.9); background-position: center;"">
                 <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -54,7 +54,20 @@
                         <li><a runat="server" href="~/About" class="custom-navbar--link ">About</a></li>
                         <li><a runat="server" href="~/Contact" class="custom-navbar--link ">Contact</a></li>
                     </ul>
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                    <div>
+                        <ul id="navbar-log-in" class="nav navbar-nav navbar-right">
+                            <li><a runat="server" href="~/Account/Register" class="custom-navbar--link ">Register</a></li>
+                            <li><a runat="server" href="~/Account/Login" class="custom-navbar--link ">Log in</a></li>
+                        </ul>
+                        <ul id="navbar-logged-in" style="display: none;" class="nav navbar-nav navbar-right">
+                            <li><a runat="server" href="~/Account/Manage" class="custom-navbar--link " title="Manage your account">Hello</a></li>
+                            <li>
+                                <a runat="server" class="custom-navbar--link " title="Log out">Log out</a>
+                                <%--<asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />--%>
+                            </li>
+                        </ul>
+                    </div>
+                    <%--<asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/Account/Register" class="custom-navbar--link ">Register</a></li>
@@ -69,13 +82,10 @@
                                 </li>
                             </ul>
                         </LoggedInTemplate>
-                    </asp:LoginView>
+                    </asp:LoginView>--%>
                 </div>
             </div>
-            </div>
-            <div style="width: 100%; display: flex; justify-content: center; align-items: center; height: 400px; padding: 20px 0; ">
-                <h3 style="width: 760px; margin: 0; text-align: center; font-size: 100px; color: #fff;">Boutique Private Island Resort</h3>
-            </div>
+            </div>           
         </div>
         <div style="background-color: #FFF;">
             <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
@@ -86,6 +96,20 @@
                 <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
             </footer>
         </div>
+        <script>
+            navbarLogIn = document.getElementById("navbar-log-in")
+            navbarLoggedIn = document.getElementById("navbar-logged-in")
+
+            function handleCheckLogIn() {
+                navbarLogIn.style.display = 'none'
+                navbarLoggedIn.style.display = 'block'
+            }
+
+            function handleCheckNotLogIn() {
+                navbarLogIn.style.display = 'block'
+                navbarLoggedIn.style.display = 'none'
+            }
+        </script>
     </form>
 </body>
 </html>

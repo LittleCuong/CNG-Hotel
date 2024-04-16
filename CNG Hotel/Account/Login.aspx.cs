@@ -67,40 +67,38 @@ namespace CNG_Hotel.Account
             try
             {
                 clsDatabase.OpenConnection();
-                string query = "SELECT Role_ID FROM Users WHERE User_Phone = @PhoneNumber AND User_Pass = @Password";
+                string query = "SELECT User_ID, Role_ID FROM Users WHERE User_Phone = @PhoneNumber AND User_Pass = @Password";
                 SqlCommand command = new SqlCommand(query, clsDatabase.connection);
 
                 command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
                 command.Parameters.AddWithValue("@Password", password);
 
-                int? userRole = (int?)command.ExecuteScalar();
-
-                if (userRole.HasValue)
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
                 {
+                 
+                    int userId = reader.GetInt32(0);
+                    int userRole = reader.GetInt32(1);
+               
+                    HttpCookie userIdCookie = new HttpCookie("id", userId.ToString());
+                    //HttpCookie userRoleCookie = new HttpCookie("UserRole", userRole.ToString());
+                    Response.Cookies.Add(userIdCookie);
+                    //Response.Cookies.Add(userRoleCookie);
+                 
                     if (userRole == 1)
-                    {
-                        // Client user, redirect to client page
+                    {                    
                         System.Diagnostics.Debug.WriteLine("Login admin");
                     }
                     else if (userRole == 2)
                     {
-                        // Admin user, redirect to admin page
-                        System.Diagnostics.Debug.WriteLine("Login client");
+                        Response.Redirect("/Default.aspx");
                     }
                 }
-
-                //int count = (int)command.ExecuteScalar();
-                //bool status = Convert.ToBoolean(command.ExecuteScalar());
-                //System.Diagnostics.Debug.WriteLine("Login: " + status);
-                //if (count > 0)
-                //{
-                //    System.Diagnostics.Debug.WriteLine("Have account");
-                //    //Response.Redirect("/Default.aspx");
-                //}
-                //else
-                //{
-                //    System.Diagnostics.Debug.WriteLine("No account");
-                //}
+                else
+                {
+                    // Account does not exist
+                    System.Diagnostics.Debug.WriteLine("No account");
+                }
             }
             catch (Exception)
             {
