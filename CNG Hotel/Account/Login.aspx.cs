@@ -81,9 +81,7 @@ namespace CNG_Hotel.Account
                     int userRole = reader.GetInt32(1);
                
                     HttpCookie userIdCookie = new HttpCookie("id", userId.ToString());
-                    //HttpCookie userRoleCookie = new HttpCookie("UserRole", userRole.ToString());
                     Response.Cookies.Add(userIdCookie);
-                    //Response.Cookies.Add(userRoleCookie);
                  
                     if (userRole == 1)
                     {                    

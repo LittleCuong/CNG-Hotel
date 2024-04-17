@@ -51,12 +51,48 @@ namespace CNG_Hotel.Account
         }
 
         [WebMethod]
+        public static String HandlePlaceRoom(int userID, int roomId, string detail, string bookingDate, string checkIn, string checkOut)
+        {
+            try
+            {
+                if (CheckReservation(roomId, checkIn, checkOut) == "You can book")
+                {
+                    clsDatabase.OpenConnection();
+
+                    string queryInsertReserve = "INSERT INTO Reservation (R_Details, R_Status, R_Booking_Date, User_ID) VALUES(@Detail, 0, @CheckIn, @UserID); SELECT SCOPE_IDENTITY();";
+                    SqlCommand insertReservationCommand = new SqlCommand(queryInsertReserve, clsDatabase.connection);
+                    insertReservationCommand.Parameters.AddWithValue("@Detail", detail);
+                    insertReservationCommand.Parameters.AddWithValue("@CheckIn", checkIn);
+                    insertReservationCommand.Parameters.AddWithValue("@UserID", userID);
+                    int reservationId = Convert.ToInt32(insertReservationCommand.ExecuteScalar());
+
+                    string queryInsertBookingDetail = "INSERT INTO Booking_Details (Date_Checkin, Date_Checkout, R_ID, Room_ID) VALUES (@CheckIn, @CheckOut, @ReservationID, @RoomID);";
+                    SqlCommand insertBookingDetailCommand = new SqlCommand(queryInsertBookingDetail, clsDatabase.connection);
+                    insertBookingDetailCommand.Parameters.AddWithValue("@CheckIn", checkIn);
+                    insertBookingDetailCommand.Parameters.AddWithValue("@CheckOut", checkOut);
+                    insertBookingDetailCommand.Parameters.AddWithValue("@ReservationID", reservationId);
+                    insertBookingDetailCommand.Parameters.AddWithValue("@RoomID", roomId);
+                    insertBookingDetailCommand.ExecuteNonQuery();
+
+                    return "Success";
+                }
+                else
+                {
+                    return "Room has been booked";
+                }
+            }
+            catch (Exception)
+            {
+                return "Error";
+            }
+        }
+
+        [WebMethod]
         public static String CheckReservation(int roomId, string checkIn, string checkOut)
         {
             try
             {
                 clsDatabase.OpenConnection();
-
                 string query = "SELECT COUNT(*) AS bookings_count FROM Booking_Details WHERE Room_ID = @RoomID AND (@CheckIn BETWEEN Date_Checkin AND Date_Checkout OR @CheckOut BETWEEN Date_Checkin AND Date_Checkout OR Date_Checkin BETWEEN @CheckIn AND @CheckOut);";
                 SqlCommand command = new SqlCommand(query, clsDatabase.connection);
                 command.Parameters.AddWithValue("@RoomID", roomId);

@@ -44,6 +44,10 @@
                             <input class="reservation-input date-input" type="date" id="checkout" name="checkout">
                        </div>
                        <div class="reservation-input--container">
+                            <label style="font-size: 18px; font-weight: lighter" for="detail">Trips for</label>
+                            <input class="reservation-input date-input" style="width: 124px; text-align: center;" type="text" id="detail" name="detal" value="Vacation">
+                       </div>
+                       <div class="reservation-input--container">
                             <label style="font-size: 18px; font-weight: lighter" for="checkin">Days</label>
                             <input class="reservation-input days-input" disabled type="number" id="days" name="days">
                        </div>
@@ -55,7 +59,10 @@
                            <div class="default-btn check-reserve--btn" style="position: relative; display: flex; justify-content: center; text-align: center;" >
                                 <input onClick='<%#"handleCheckReservation(" + Eval("Room_ID") + ")"%>' type="button" style="position: absolute; left: 0; width: 100%; height: 100%; background-color: transparent; border: none; outline: none;" value="Check Reservation"/>
                            </div>
-                           <asp:Button runat="server" CssClass="default-btn" Text="Book Your Stay Now" OnClientClick='<%# "handleOrderRoom(" + Eval("Room_ID") + "); return false;" %>' CommandArgument='<%# Eval("Room_ID")%>' />
+                           <div class="default-btn" style="position: relative; display: flex; justify-content: center; text-align: center;" >
+                                <input onClick='<%#"handleOrderRoom(" + Eval("Room_ID") + ")"%>' type="button" style="position: absolute; left: 0; width: 100%; height: 100%; background-color: transparent; border: none; outline: none; color: #fff;" value="Book Your Stay Now"/>
+                           </div>
+                           <%--<asp:Button runat="server" CssClass="default-btn" Text="Book Your Stay Now" OnClientClick='<%# "handleOrderRoom(" + Eval("Room_ID") + "); return false;" %>' CommandArgument='<%# Eval("Room_ID")%>' />--%>
                        </div>
                    </div>
                </div>
@@ -144,39 +151,59 @@
                 dataType: "json",
                 success: function (response) {
                     if (response.d === "Have been booked") {
-                        alert("The room have been booked!")
+                        alert("Room not available. Please choose a new check in and check out day")
                     } else if (response.d === "You can book") {
                         alert("You can book now!");
                     }
-                    },
+                },
                 error: function (xhr, status, error) {
                     alert("Error occurs!")
                     console.error("Error ordering room: " + error);
                 }
             })
           }
+       
+          function handleOrderRoom(id) {
+              let name = "id" + "=";
+              let decodedCookie = decodeURIComponent(document.cookie);
+              let ca = decodedCookie.split(';');
+    
+              let userID = 0;
 
-          function handleOrderRoom(data) {
-              console.log(data)
-            <%--$.ajax({
-                type: "POST",
-                url: '<%= ResolveUrl("Default.aspx/OrderRoomMethod") %>',
-                data: JSON.stringify({  }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    console.log(response)
-                    //if (response.d === "authenticated") {
-                    //    openConfirmModal(roomId);
-                    //} else if (response.d === "not_authenticated") {
-                    //    alert("Please log in to place an order.");
-                    //}
-                    },
-                error: function (xhr, status, error) {
-                    console.error("Error ordering room: " + error);
+              for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                  c = c.substring(1);
                 }
-            });--%>
-          }
+                if (c.indexOf(name) == 0) {
+                    userID = c.substring(name.length, c.length)
+                }
+              }
+
+              detail = document.getElementById("detail")
+
+              $.ajax({
+                    type: "POST",
+                    url: '<%= ResolveUrl("PlaceRoom.aspx/HandlePlaceRoom") %>',
+                    data: JSON.stringify({ userID: userID, roomId: id, detail: detail.value, bookingDate: currentDate, checkIn: checkIn.value, checkOut: checkOut.value }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.d === "Success") {
+                            alert("Place room successfully")
+                        } else if (response.d === "Room has been booked") {
+                            alert("Room not available. Please choose a new check in and check out day")
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error ordering room: " + error);
+                    }
+                });
+           }
+
+        function getCookie(cname) {
+          
+         }
 
         
 
