@@ -38,7 +38,7 @@
             </Scripts>
         </asp:ScriptManager>
         <div>
-            <div class="navbar" style="margin: 0 !important; background-color: rgba(38,38,38, 0.9); background-position: center;"">
+            <div class="navbar navbar-custom" style="margin: 0 !important; background-color: #000 !important; color: #fff;">
                 <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -48,9 +48,9 @@
                     </button>
                     <a class="navbar-brand custom-navbar--link" runat="server" href="~/">CNG Hotel</a>
                 </div>
-                <div class="navbar-collapse collapse">
+                <div class="navbar-collapse collapse"">
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/" class="custom-navbar--link ">Home</a></li>
+                        <li class="nav-li"><a runat="server" href="~/" class="custom-navbar--link ">Home</a></l>
                         <li><a runat="server" href="~/About" class="custom-navbar--link ">About</a></li>
                         <li><a runat="server" href="~/Contact" class="custom-navbar--link ">Contact</a></li>
                     </ul>

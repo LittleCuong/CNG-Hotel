@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -47,6 +48,36 @@ namespace CNG_Hotel.Account
                 ClientScript.RegisterStartupScript(this.GetType(), "alert", "<script>alert('Error occurs')</script>");
             }
             return table;
+        }
+
+        [WebMethod]
+        public static String CheckReservation(int roomId, string checkIn, string checkOut)
+        {
+            try
+            {
+                clsDatabase.OpenConnection();
+
+                string query = "SELECT COUNT(*) AS bookings_count FROM Booking_Details WHERE Room_ID = @RoomID AND (@CheckIn BETWEEN Date_Checkin AND Date_Checkout OR @CheckOut BETWEEN Date_Checkin AND Date_Checkout OR Date_Checkin BETWEEN @CheckIn AND @CheckOut);";
+                SqlCommand command = new SqlCommand(query, clsDatabase.connection);
+                command.Parameters.AddWithValue("@RoomID", roomId);
+                command.Parameters.AddWithValue("@CheckIn", checkIn);
+                command.Parameters.AddWithValue("@CheckOut", checkOut);
+                int bookingsCount = (int)command.ExecuteScalar();
+                clsDatabase.CloseConnection();
+        
+                if (bookingsCount > 0)
+                {
+                    return "Have been booked";
+                }
+                else
+                {
+                    return "You can book";
+                }
+            }
+            catch (Exception)
+            {
+                return "error";
+            }
         }
     }
 }

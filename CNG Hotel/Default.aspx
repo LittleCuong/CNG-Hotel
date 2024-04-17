@@ -13,30 +13,6 @@
                 
             //}         
         }
-
-        function handleOrderRoom(data)
-        {
-            $.ajax({
-                    type: "POST",
-                    url: '<%= ResolveUrl("Default.aspx/OrderRoomMethod") %>',
-                    data: JSON.stringify({  }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        console.log(response)
-                        //if (response.d === "authenticated") {
-                        //    openConfirmModal(roomId);
-                        //} else if (response.d === "not_authenticated") {
-                        //    alert("Please log in to place an order.");
-                        //}
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("Error ordering room: " + error);
-                    }
-                });
-        }
-
-        
     </script>
     <div style="height: 350px; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../image/beach_background.jpg); background-position: bottom;">
         <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; padding: 20px 0; ">
@@ -66,9 +42,8 @@
                                         <i style="margin: 0 2px 0 20px;" class="fa-solid fa-couch"></i>
                                         <asp:Label Text='<%# Eval("Type_Details")%>' runat="server" />
                                     </span>
-                                </div>
-                                
-                                <asp:Button ID="btnClick" runat="server" Text="Đặt ngay" CssClass="room-order--btn" OnClientClick='<%# "orderRoom(" + Eval("Room_ID") + "); return false;" %>' CommandArgument='<%# Eval("Room_ID")%>'/>                                             
+                                </div>                              
+                                <asp:Button ID="btnClick" runat="server" Text="Đặt ngay" CssClass="view-room--btn default-btn" OnClientClick='<%# "orderRoom(" + Eval("Room_ID") + "); return false;" %>' CommandArgument='<%# Eval("Room_ID")%>'/>                                             
                               </div>
                             </div>
                         </div>               
@@ -76,37 +51,37 @@
               </asp:Repeater>             
         </div>
         <h3 class="room-name--header">Phòng đôi</h3>
-        <div class="row" style="position: relative; width: 100%; display: flex; flex-direction: row; overflow: hidden;  margin-top: 4px;">          
+        <div class="row" style="margin-top: 4px;">        
             <asp:Repeater ID="doubleRoomRepeater" runat="server">
                 <ItemTemplate>
-                    <div class="col-md-4 custom-container">
-                        <div class="room-container">
-                            <div class="room-image--contain">
-                                <img id="roomImage" src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
-                            </div>
-                            <div class="room-name--section">
-                                  <div style="display: flex; flex-direction: column;">
-                                    <span id="roomName" runat="server" class="room-name">
-                                        <asp:Label Text='<%# Eval("Room_Name") %>' runat="server" />
-                                    </span>
-                                    <span id="roomType" style="font-size: 12px;">
-                                        <i style="margin: 0 2px 0 0px;" class="fa-solid fa-bed"></i>
-                                        <asp:Label Text='<%# Eval("Type_Name")%>' runat="server" />
-                                        <i style="margin: 0 2px 0 20px;" class="fa-solid fa-users"></i>
-                                        <asp:Label Text='<%# Eval("Type_Size")%>' runat="server" />
-                                        <i style="margin: 0 2px 0 20px;" class="fa-solid fa-couch"></i>
-                                        <asp:Label Text='<%# Eval("Type_Details")%>' runat="server" />
-                                    </span>
+                        <div class="col-md-4 custom-container">
+                            <div class="room-container">
+                                <div class="room-image--contain">
+                                    <img id="roomImage" src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
                                 </div>
-                               <button runat="server" onclick="orderBtnClick_Click" class="room-order--btn">Đặt ngay</button>
-                            </div>
-                        </div>
-                    </div>               
+                                <div class="room-name--section">
+                                    <div style="display: flex; flex-direction: column;">
+                                        <span id="roomName" runat="server" class="room-name">
+                                            <asp:Label Text='<%# Eval("Room_Name") %>' runat="server" />
+                                        </span>
+                                        <span id="roomType" style="font-size: 12px;">
+                                            <i style="margin: 0 2px 0 0px;" class="fa-solid fa-bed"></i>
+                                            <asp:Label Text='<%# Eval("Type_Name")%>' runat="server" />
+                                            <i style="margin: 0 2px 0 20px;" class="fa-solid fa-users"></i>
+                                            <asp:Label Text='<%# Eval("Type_Size")%>' runat="server" />
+                                            <i style="margin: 0 2px 0 20px;" class="fa-solid fa-couch"></i>
+                                            <asp:Label Text='<%# Eval("Type_Details")%>' runat="server" />
+                                        </span>
+                                    </div>                              
+                                    <asp:Button ID="btnClick" runat="server" Text="Đặt ngay" CssClass="view-room--btn default-btn" OnClientClick='<%# "orderRoom(" + Eval("Room_ID") + "); return false;" %>' CommandArgument='<%# Eval("Room_ID")%>'/>                                             
+                                  </div>
+                                </div>
+                            </div>               
                 </ItemTemplate>
-            </asp:Repeater>                       
+            </asp:Repeater>             
         </div>
         <h3 class="room-name--header">Phòng hạng sang</h3>
-        <div class="row room-container" style="position: relative; width: 100%; display: flex; flex-direction: row; overflow: hidden;  margin-top: 4px;">   
+        <div class="row" style="margin-top: 4px;">        
             <asp:Repeater ID="suiteRoomRepeater" runat="server">
                 <ItemTemplate>
                     <div class="col-md-4 custom-container">
@@ -115,7 +90,7 @@
                                 <img id="roomImage" src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
                             </div>
                             <div class="room-name--section">
-                                  <div style="display: flex; flex-direction: column;">
+                                <div style="display: flex; flex-direction: column;">
                                     <span id="roomName" runat="server" class="room-name">
                                         <asp:Label Text='<%# Eval("Room_Name") %>' runat="server" />
                                     </span>
@@ -127,13 +102,13 @@
                                         <i style="margin: 0 2px 0 20px;" class="fa-solid fa-couch"></i>
                                         <asp:Label Text='<%# Eval("Type_Details")%>' runat="server" />
                                     </span>
-                                </div>
-                               <button runat="server" onclick="orderBtnClick_Click" class="room-order--btn">Đặt ngay</button>
+                                </div>                              
+                                <asp:Button ID="btnClick" runat="server" Text="Đặt ngay" CssClass="view-room--btn default-btn" OnClientClick='<%# "orderRoom(" + Eval("Room_ID") + "); return false;" %>' CommandArgument='<%# Eval("Room_ID")%>'/>                                             
+                              </div>
                             </div>
-                        </div>
-                    </div>               
-                </ItemTemplate>
-            </asp:Repeater>             
+                        </div>               
+                 </ItemTemplate>
+              </asp:Repeater>             
         </div>
     </div>
 </asp:Content>

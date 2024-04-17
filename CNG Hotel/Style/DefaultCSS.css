@@ -1,13 +1,20 @@
 ﻿/* Navbar */
+
 .custom-navbar--link {
-    color: #Fff !important;
     text-transform: uppercase;
+    color: #fff !important;
+    transition: all 0.2s linear;
+}
+
+.custom-navbar--link:hover {
+    background-color: #ab916c;
+    color: #000;
 }
 
 .nav > li > a:hover, .nav > li > a:focus {
     transition: all 0.2s linear;
     text-decoration: none;
-    background-color: rgba(0,0,0,0.3) !important;
+    background-color: #ab916c !important;
 }
 
 .body-content {
@@ -79,6 +86,11 @@
 
 .room-name {
     font-size: 26px;
+}
+
+.view-room--btn {
+    margin-top: 12px !important;
+    height: 30px !important;
 }
 
 .room-order--btn {
@@ -175,7 +187,7 @@
     padding: 12px;
     border-color: #b99d75;
     border-style: solid;
-    border-width: 1px   ;
+    border-width: 1px;
     color: #333;
 }
 
@@ -209,3 +221,25 @@
     border-color: #333;
 }
 
+.default-btn, .room-place--btn {
+    height: 48px;
+    margin: 4px 0 4px 0; 
+    padding: 0 15px; 
+    border-radius: 5px; 
+    border: none;
+    background-color: #000;
+    outline: none; 
+    color: #fff;
+    transition: all 0.4s linear;
+}
+
+.check-reserve--btn {
+    border-color: #b99d75;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #fff;
+}
+
+.default-btn:hover, .room-place--btn:hover, .check-reserve--btn:hover {
+    background-color: #ab916c;
+}

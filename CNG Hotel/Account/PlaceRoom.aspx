@@ -32,7 +32,7 @@
                <div class="col-md-4" style="display: flex; flex-direction: column; height: 100%; padding: 30px 25px; box-shadow: 0 5px 30px rgba(80, 57, 24, 0.15); border-radius: 8px;">
                    <div style="display: flex; justify-content: space-between; align-items: center;">
                     <h3>RESERVE: </h3>
-                    <span style="width: 100%; display: block; padding-top: 26px; text-align: end">From <p style="display: inline-block; margin: 0;">$<asp:Label ID="roomTypePriceLabel" ClientIDMode="Static" Font-Bold="true" Text='<%#Eval("Room_Type_Price")%>' runat="server" /></p>/night</span>  
+                    <span style="width: 100%; display: block; padding-top: 20px; font-size: 16px; text-align: end">From <p style="display: inline-block; margin: 0;">$<asp:Label ID="roomTypePriceLabel" ClientIDMode="Static" Font-Bold="true" Text='<%#Eval("Room_Type_Price")%>' runat="server" /></p>/night</span>  
                    </div>
                    <div class="">
                        <div class="reservation-input--container">
@@ -49,7 +49,13 @@
                        </div>
                        <div class="cost-container">                          
                             <h3 style="margin: 10px 0 0 0;">TOTAL COST: </h3>
-                            <span id="cost"></span>
+                            <span id="cost" style="margin-top: 10px; font-weight: 600; font-size: 20px;"></span>
+                       </div>
+                       <div style="display: flex; flex-direction: column; margin-top: 10px">
+                           <div class="default-btn check-reserve--btn" style="position: relative; display: flex; justify-content: center; text-align: center;" >
+                                <input onClick='<%#"handleCheckReservation(" + Eval("Room_ID") + ")"%>' type="button" style="position: absolute; left: 0; width: 100%; height: 100%; background-color: transparent; border: none; outline: none;" value="Check Reservation"/>
+                           </div>
+                           <asp:Button runat="server" CssClass="default-btn" Text="Book Your Stay Now" OnClientClick='<%# "handleOrderRoom(" + Eval("Room_ID") + "); return false;" %>' CommandArgument='<%# Eval("Room_ID")%>' />
                        </div>
                    </div>
                </div>
@@ -58,74 +64,121 @@
        </ItemTemplate>
     </asp:Repeater>  
     <script>
-     
-      var today = new Date();
-
-      var dd = String(today.getDate()).padStart(2, '0');
-      var mm = String(today.getMonth() + 1).padStart(2, '0');
-      var yyyy = today.getFullYear();
-
-      var currentDate = yyyy + '-' + mm + '-' + dd;
-      
-      var defaultCheckoutDate = String(today.getDate() + 1).padStart(2, '0');
-
-      // Set the value of the input element
-      document.getElementById("checkin").value = currentDate;
-      document.getElementById("checkin").min = currentDate;
-      document.getElementById("checkout").value = yyyy + '-' + mm + '-' + defaultCheckoutDate;
-      document.getElementById("days").value = 1
         
-      var roomTypePriceLabel = document.getElementById("roomTypePriceLabel");
+          var checkIn = document.getElementById("checkin")
+          var checkOut = document.getElementById("checkout")
+          var days = document.getElementById("days")
+          var cost = document.getElementById("cost")
 
-      document.getElementById("cost").textContent = document.getElementById("roomTypePriceLabel").textContent * 1
+          var roomTypePriceLabel = document.getElementById("roomTypePriceLabel");
 
-      document.getElementById("checkin").addEventListener("change", function () {
-          var checkinDate = new Date(this.value);
-          checkinDate.setDate(checkinDate.getDate() + 1); // Add one day
 
-          var checkin_dd = String(checkinDate.getDate()).padStart(2, '0');
-          var checkin_mm = String(checkinDate.getMonth() + 1).padStart(2, '0');
-          var checkin_yyyy = checkinDate.getFullYear();
+          var today = new Date();
 
-          var minCheckoutDate = checkin_yyyy + '-' + checkin_mm + '-' + checkin_dd;
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0');
+          var yyyy = today.getFullYear();
 
-          document.getElementById("checkout").min = minCheckoutDate;
+          var currentDate = yyyy + '-' + mm + '-' + dd;
+      
+          var defaultCheckoutDate = String(today.getDate() + 1).padStart(2, '0');
+
+          // Set the value of the input element
+          checkIn.value = currentDate;
+          checkIn.min = currentDate;
+
+          checkOut.value = yyyy + '-' + mm + '-' + defaultCheckoutDate;
+          days.value = 1
+        
+
+          cost.textContent = '$' + document.getElementById("roomTypePriceLabel").textContent * 1
+
+          checkIn.addEventListener("change", function () {
+              var checkinDate = new Date(this.value);
+              checkinDate.setDate(checkinDate.getDate() + 1); // Add one day
+
+              var checkin_dd = String(checkinDate.getDate()).padStart(2, '0');
+              var checkin_mm = String(checkinDate.getMonth() + 1).padStart(2, '0');
+              var checkin_yyyy = checkinDate.getFullYear();
+
+              var minCheckoutDate = checkin_yyyy + '-' + checkin_mm + '-' + checkin_dd;
+
+              checkOut.min = minCheckoutDate;
        
-          if (document.getElementById("checkout").value < minCheckoutDate) {
-              document.getElementById("checkout").value = minCheckoutDate;
-              document.getElementById("days").value = 1;
-              document.getElementById("cost").innerHTML = document.getElementById("roomTypePriceLabel").textContent * 1
-              console.log(document.getElementById("roomTypePriceLabel").textContent * 1)
+              if (checkOut.value < minCheckoutDate) {
+                  checkOut.value = minCheckoutDate;
+                  days.value = 1;
+                  cost.innerHTML = '$' + roomTypePriceLabel.textContent * 1
+              } else {
+                  var checkinDate = new Date(checkIn.value);
+                  var checkoutDate = new Date(checkOut.value);
 
-          } else {
-              var checkinDate = new Date(document.getElementById("checkin").value);
-              var checkoutDate = new Date(document.getElementById("checkout").value);
+                  var differenceInTime = checkoutDate.getTime() - checkinDate.getTime();
 
+                  var differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+                  days.value = differenceInDays;
+                  cost.innerHTML = '$' + roomTypePriceLabel.textContent * differenceInDays
+                }
+
+           });
+
+          checkOut.addEventListener("change", function () {
+              var checkinDate = new Date(checkIn.value);
+              var checkoutDate = new Date(checkOut.value);
+        
               var differenceInTime = checkoutDate.getTime() - checkinDate.getTime();
-
+        
               var differenceInDays = differenceInTime / (1000 * 3600 * 24);
 
-              document.getElementById("days").value = differenceInDays;
-              document.getElementById("cost").innerHTML = document.getElementById("roomTypePriceLabel").textContent * differenceInDays
-              console.log(document.getElementById("roomTypePriceLabel").textContent * differenceInDays)
+              days.value = differenceInDays;
+              cost.innerHTML ='$'+ roomTypePriceLabel.textContent * differenceInDays
+          });
+
+          function handleCheckReservation(id) {
+            $.ajax({
+                type: "POST",
+                url: '<%= ResolveUrl("PlaceRoom.aspx/CheckReservation") %>',
+                data: JSON.stringify({roomId: id, checkIn: checkIn.value, checkOut: checkOut.value }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response.d === "Have been booked") {
+                        alert("The room have been booked!")
+                    } else if (response.d === "You can book") {
+                        alert("You can book now!");
+                    }
+                    },
+                error: function (xhr, status, error) {
+                    alert("Error occurs!")
+                    console.error("Error ordering room: " + error);
+                }
+            })
           }
 
-      });
+          function handleOrderRoom(data) {
+              console.log(data)
+            <%--$.ajax({
+                type: "POST",
+                url: '<%= ResolveUrl("Default.aspx/OrderRoomMethod") %>',
+                data: JSON.stringify({  }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response)
+                    //if (response.d === "authenticated") {
+                    //    openConfirmModal(roomId);
+                    //} else if (response.d === "not_authenticated") {
+                    //    alert("Please log in to place an order.");
+                    //}
+                    },
+                error: function (xhr, status, error) {
+                    console.error("Error ordering room: " + error);
+                }
+            });--%>
+          }
 
-      document.getElementById("checkout").addEventListener("change", function () {
-          var checkinDate = new Date(document.getElementById("checkin").value);
-          var checkoutDate = new Date(document.getElementById("checkout").value);
-
-          // Calculate the difference in milliseconds
-          var differenceInTime = checkoutDate.getTime() - checkinDate.getTime();
-
-          // Convert milliseconds to days
-          var differenceInDays = differenceInTime / (1000 * 3600 * 24);
-
-          // Display the result
-          document.getElementById("days").value = differenceInDays;
-          document.getElementById("cost").innerHTML = document.getElementById("roomTypePriceLabel").textContent * differenceInDays
-      });
+        
 
     </script>
 </asp:Content>
