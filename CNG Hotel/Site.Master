@@ -61,7 +61,7 @@
                         </ul>
                         <ul id="navbar-logged-in" style="display: none;" class="nav navbar-nav navbar-right">
                             <li><a runat="server" href="~/Account/MyReservation" class="custom-navbar--link " title="Manage your account">My Reservation</a></li>                                                                                                 
-                            <li><a runat="server" class="custom-navbar--link " title="Log out">Log out</a> </li>
+                            <li onclick="handleLogOut()" style="cursor: pointer;"><a runat="server" class="custom-navbar--link " title="Log out">Log out</a> </li>
                         </ul>
                     </div>
                 </div>
@@ -89,6 +89,15 @@
             function handleCheckNotLogIn() {
                 navbarLogIn.style.display = 'block'
                 navbarLoggedIn.style.display = 'none'
+            }
+
+            function handleLogOut() {
+                deleteCookie('id');
+            }
+
+            function deleteCookie(name) {
+                document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+                location.reload(); // Refresh the page
             }
         </script>
     </form>

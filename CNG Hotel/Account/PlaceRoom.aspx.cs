@@ -78,7 +78,7 @@ namespace CNG_Hotel.Account
         // Đây là WebMethod - Là các phương thức/method có thể được gọi bên trình duyệt thông qua sử dụng AJAX
         // Method đặt phòng nhận tham số userID, roomID, detail, bookingDate, checkIn và checkOut để insert vào database
         [WebMethod]
-        public static String HandlePlaceRoom(int userID, int roomId, string detail, string bookingDate, string checkIn, string checkOut)
+        public static String HandlePlaceRoom(int userID, int roomId, string detail, string bookingDate, string checkIn, string checkOut, int total)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace CNG_Hotel.Account
                     int reservationId = Convert.ToInt32(insertReservationCommand.ExecuteScalar());
 
                     // Tạo câu truy vấn insert vào bảng Booking_Details
-                    string queryInsertBookingDetail = "INSERT INTO Booking_Details (Date_Checkin, Date_Checkout, R_ID, Room_ID) VALUES (@CheckIn, @CheckOut, @ReservationID, @RoomID);";
+                    string queryInsertBookingDetail = "INSERT INTO Booking_Details (Date_Checkin, Date_Checkout, R_ID, Room_ID, Total) VALUES (@CheckIn, @CheckOut, @ReservationID, @RoomID, @Total);";
 
                     // Tạo lệnh truy vấn và truyền câu truy vấn vào
                     SqlCommand insertBookingDetailCommand = new SqlCommand(queryInsertBookingDetail, clsDatabase.connection);
@@ -113,6 +113,7 @@ namespace CNG_Hotel.Account
                     insertBookingDetailCommand.Parameters.AddWithValue("@CheckOut", checkOut);
                     insertBookingDetailCommand.Parameters.AddWithValue("@ReservationID", reservationId);
                     insertBookingDetailCommand.Parameters.AddWithValue("@RoomID", roomId);
+                    insertBookingDetailCommand.Parameters.AddWithValue("@Total", roomId);
 
                     // Thực hiện truy vấn mà không trả về giá trị
                     insertBookingDetailCommand.ExecuteNonQuery();

@@ -94,7 +94,7 @@ namespace CNG_Hotel.Account
                     SqlCommand updateCommand = new SqlCommand(updateQuery, clsDatabase.connection);
                     updateCommand.Parameters.AddWithValue("@reservationId", reservationId);
                     updateCommand.ExecuteNonQuery();
-                    showPopup("Xác nhận đã thanh toán thành công!", "success");
+                    showPopup("Booking Confirm!", "success");
 
                     dataBind();
                     clsDatabase.CloseConnection();
@@ -129,7 +129,7 @@ namespace CNG_Hotel.Account
             }
             else
             {
-                showPopup("Vui lòng nhập số điện thoại", "error");
+                showPopup("Please enter phone number!", "error");
                 dataBind();
             }
         }

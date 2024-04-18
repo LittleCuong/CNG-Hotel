@@ -1,11 +1,13 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdminPage.aspx.cs" Inherits="CNG_Hotel.Account.AdminPage" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-   <div>
-            <h1 style="display: flex; justify-content: center; align-content: center; width: 100%;">Danh Sách Đặt Phòng</h1>
-            <div style="padding: 0 0 15px 25px;">
-                <asp:TextBox ID="txtSearchPhone" runat="server" Width="150px" placeHolder="Nhập số điện thoại"></asp:TextBox>
-                <asp:Button ID="btnSearch" runat="server" Text="Tìm Kiếm" OnClick="btnSearch_Click" />
+        <div class="container" style="padding-top: 20px; padding-bottom: 20px; box-shadow: 0 5px 30px rgba(80, 57, 24, 0.15); border-radius: 8px;">
+            <h1 style="margin-top: 12px; text-align: center">Reservation</h1>
+            <div style="padding: 15px 0;">
+                <div class="search-input--container">
+                    <asp:TextBox CssClass="input-search" ID="txtSearchPhone" runat="server" Width="150px" placeHolder="Enter phone number"></asp:TextBox>
+                    <asp:Button ID="btnSearch" CssClass="default-btn search-btn" runat="server" Text="Search" OnClick="btnSearch_Click" />
+                </div>         
             </div>
             <br />
             <asp:GridView ID="reservationsGridView" runat="server" AutoGenerateColumns="False"
@@ -15,27 +17,27 @@
                 OnPageIndexChanging="reservationsGridView_PageIndexChanging"
                 OnRowDataBound="reservationsGridView_RowDataBound"
                 OnRowCommand="reservationsGridView_RowCommand" DataKeyNames="R_ID">
-                <AlternatingRowStyle BackColor="#DCDCDC" />
+                <AlternatingRowStyle BackColor="#53624E" />
                 <Columns>
-                    <asp:BoundField DataField="Booking_date" HeaderText="Ngày tạo đơn" />
-                    <asp:BoundField DataField="User_name" HeaderText="Tên khách hàng" />
-                    <asp:BoundField DataField="User_phone" HeaderText="Số điện thoại" />
-                    <asp:BoundField DataField="Date_checkin" HeaderText="Ngày nhận phòng" DataFormatString="{0:dd/MM/yyyy}" />
-                    <asp:BoundField DataField="Date_checkout" HeaderText="Ngày trả phòng" DataFormatString="{0:dd/MM/yyyy}" />
-                    <asp:BoundField DataField="Room_name" HeaderText="Phòng" />
-                    <asp:BoundField DataField="Status" HeaderText="Trạng thái" />
-                    <asp:BoundField DataField="Room_type" HeaderText="Loại phòng" />
-                    <asp:BoundField DataField="Total_price" HeaderText="Tổng tiền" DataFormatString="{0:.000 VND}" />
-                    <asp:TemplateField HeaderText="Xác Nhận">
+                    <asp:BoundField ItemStyle-CssClass="header-reservation" DataField="Booking_date" HeaderText="Booking date" />
+                    <asp:BoundField ItemStyle-CssClass="header-reservation" DataField="User_name" HeaderText="Customer name" />
+                    <asp:BoundField ItemStyle-CssClass="header-reservation" DataField="User_phone" HeaderText="Phone number" />
+                    <asp:BoundField ItemStyle-CssClass="header-reservation" DataField="Date_checkin" HeaderText="Check in" DataFormatString="{0:dd/MM/yyyy}" />
+                    <asp:BoundField ItemStyle-CssClass="header-reservation" DataField="Date_checkout" HeaderText="Check out" DataFormatString="{0:dd/MM/yyyy}" />
+                    <asp:BoundField ItemStyle-CssClass="header-reservation" DataField="Room_name" HeaderText="Room" />
+                    <asp:BoundField ItemStyle-CssClass="header-reservation" DataField="Status" HeaderText="Status" />
+                    <asp:BoundField ItemStyle-CssClass="header-reservation" DataField="Room_type" HeaderText="Room type" />
+                    <asp:BoundField ItemStyle-CssClass="header-reservation" DataField="Total_price" HeaderText="Total" DataFormatString="{}" />
+                    <asp:TemplateField HeaderText="Confirm">
                         <ItemTemplate>
-                            <asp:Button ID="Button1" runat="server" Text="Xác Nhận Thanh Toán" CommandName="ConfirmPayment" CommandArgument="<%#Container.DataItemIndex%>" />
+                            <asp:Button ID="Button1" runat="server" Text="Booking Confimation" CommandName="ConfirmPayment" CommandArgument="<%#Container.DataItemIndex%>" />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
                 <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-                <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#53624E" CssClass="header-reservation" Font-Bold="False" ForeColor="White" />
                 <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
+                <RowStyle CssClass="row-reservation" BackColor="#EEEEEE" ForeColor="Black" />
                 <SelectedRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
                 <SortedAscendingCellStyle BackColor="#F1F1F1" />
                 <SortedAscendingHeaderStyle BackColor="#0000A9" />

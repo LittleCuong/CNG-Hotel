@@ -199,6 +199,13 @@
 
           // Hàm đặt phòng
           function handleOrderRoom(id) {
+              
+              var checkinDate = new Date(checkIn.value);
+              var checkoutDate = new Date(checkOut.value);
+        
+              var differenceInTime = checkoutDate.getTime() - checkinDate.getTime();
+        
+              var differenceInDays = differenceInTime / (1000 * 3600 * 24);
 
               // Lấy giá trị của một cookie có tên là "id" trong trình duyệt
               // gán vào biến name
@@ -232,7 +239,7 @@
                     $.ajax({
                             type: "POST",
                             url: '<%= ResolveUrl("PlaceRoom.aspx/HandlePlaceRoom") %>',
-                            data: JSON.stringify({ userID: userID, roomId: id, detail: detail.value, bookingDate: currentDate, checkIn: checkIn.value, checkOut: checkOut.value }),
+                            data: JSON.stringify({ userID: userID, roomId: id, detail: detail.value, bookingDate: currentDate, checkIn: checkIn.value, checkOut: checkOut.value, total: roomTypePriceLabel.textContent * differenceInDays}),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             success: function (response) {
@@ -250,7 +257,7 @@
                     // Không có thì nghĩa là chưa đăng nhập nên thông báo yêu cầu đăng nhập
                     alert("You must sign in first!")
                 }
-              }       
+              }
            }
     </script>
 </asp:Content>

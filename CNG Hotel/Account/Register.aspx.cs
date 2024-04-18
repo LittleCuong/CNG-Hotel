@@ -19,30 +19,28 @@ namespace CNG_Hotel.Account
             string password = Password.Text;
             string confirmPassword = ConfirmPassword.Text;
 
-            if (password != confirmPassword)
+            // Kiểm tra có bị trùng sdt không
+            if (CheckUserPhone(phone) == "existed")
             {
-                
-            } else
+                // Bi trùng thì hiện thông báo
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "<script>alert('Phone number existed');</script>");
+            }
+            else
             {
-                if (CheckUserPhone(phone) == "existed")
+                // Không trùng thì thực hiện method CreateUser
+                if (CreateUser(name, phone, password))
                 {
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "<script>alert('Phone number existed');</script>");
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "<script>alert('Register successfully, please sign in!');</script>");
+                    // Insert xong thì chuyển sang trang login
+                    Response.Redirect("/Account/Login");
+
                 }
                 else
                 {
-                    if (CreateUser(name, phone, password))
-                    {
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert", "<script>alert('Register successfully, please sign in!');</script>");
-                        Response.Redirect("/Account/Login");
-
-                    } else
-                    {
-                        ClientScript.RegisterStartupScript(this.GetType(), "alert", "<script>alert('Register failed, please try again later!');</script>");
-                    }
-
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "<script>alert('Register failed, please try again later!');</script>");
                 }
-            }
 
+            }
         }
 
         private static String CheckUserPhone(string phone)
