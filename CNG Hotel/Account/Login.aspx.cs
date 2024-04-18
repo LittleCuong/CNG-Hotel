@@ -13,15 +13,15 @@ namespace CNG_Hotel.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterHyperLink.NavigateUrl = "Register";
+            //RegisterHyperLink.NavigateUrl = "Register";
             // Enable this once you have account confirmation enabled for password reset functionality
             // ForgotPasswordHyperLink.NavigateUrl = "Forgot";
             // OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
             var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
-            if (!String.IsNullOrEmpty(returnUrl))
-            {
-                RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
-            }
+            //if (!String.IsNullOrEmpty(returnUrl))
+            //{
+            //    RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+            //}
         }
 
         protected void LogIn(object sender, EventArgs e)
@@ -84,8 +84,8 @@ namespace CNG_Hotel.Account
                     Response.Cookies.Add(userIdCookie);
                  
                     if (userRole == 1)
-                    {                    
-                        System.Diagnostics.Debug.WriteLine("Login admin");
+                    {
+                        Response.Redirect("/Account/AdminPage.aspx");
                     }
                     else if (userRole == 2)
                     {

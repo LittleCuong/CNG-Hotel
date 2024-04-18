@@ -4,14 +4,11 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+
+        // Nếu bấm đặt phòng thì chuyển sang trang đặt phòng
         function orderRoom(roomId) {
             var url = 'Account/PlaceRoom.aspx?roomId=' + roomId;
-            window.location.href = url;
-            //if (localStorage.getItem('userId')) {
-                
-            //} else {
-                
-            //}         
+            window.location.href = url;   
         }
     </script>
     <div style="height: 350px; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../image/beach_background.jpg); background-position: bottom;">
@@ -20,14 +17,15 @@
         </div>
     </div>
     <div class="container body-content" >
-        <h3 class="room-name--header">Phòng đơn</h3>
-        <div class="row" style="margin-top: 4px;">        
+        <h3 class="room-name--header">Single Room</h3>
+        <div class="row" style="margin-top: 4px;">      
+            <%-- Tạo Repeater để truy vấn và đổ dữ liệu vào --%>  
             <asp:Repeater ID="singleRoomRepeater" runat="server">
                 <ItemTemplate>
                     <div class="col-md-4 custom-container">
                         <div class="room-container">
                             <div class="room-image--contain">
-                                <img id="roomImage" src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
+                                <img id="roomImage" src="image<%# Eval("Room_Image_Path") %>" class="room-image" alt="Double room"/>
                             </div>
                             <div class="room-name--section">
                                 <div style="display: flex; flex-direction: column;">
@@ -43,6 +41,7 @@
                                         <asp:Label Text='<%# Eval("Type_Details")%>' runat="server" />
                                     </span>
                                 </div>                              
+                                <%-- OnClientClick truyền vào hàm orderRoom với tham số là id của phòng được chọn --%>
                                 <asp:Button ID="btnClick" runat="server" Text="Đặt ngay" CssClass="view-room--btn default-btn" OnClientClick='<%# "orderRoom(" + Eval("Room_ID") + "); return false;" %>' CommandArgument='<%# Eval("Room_ID")%>'/>                                             
                               </div>
                             </div>
@@ -50,14 +49,14 @@
                  </ItemTemplate>
               </asp:Repeater>             
         </div>
-        <h3 class="room-name--header">Phòng đôi</h3>
+        <h3 class="room-name--header">Double Room</h3>
         <div class="row" style="margin-top: 4px;">        
             <asp:Repeater ID="doubleRoomRepeater" runat="server">
                 <ItemTemplate>
                         <div class="col-md-4 custom-container">
                             <div class="room-container">
                                 <div class="room-image--contain">
-                                    <img id="roomImage" src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
+                                    <img id="roomImage" src="image<%# Eval("Room_Image_Path") %>" class="room-image" alt="Double room"/>
                                 </div>
                                 <div class="room-name--section">
                                     <div style="display: flex; flex-direction: column;">
@@ -80,14 +79,14 @@
                 </ItemTemplate>
             </asp:Repeater>             
         </div>
-        <h3 class="room-name--header">Phòng hạng sang</h3>
+        <h3 class="room-name--header">Suite</h3>
         <div class="row" style="margin-top: 4px;">        
             <asp:Repeater ID="suiteRoomRepeater" runat="server">
                 <ItemTemplate>
                     <div class="col-md-4 custom-container">
                         <div class="room-container">
                             <div class="room-image--contain">
-                                <img id="roomImage" src="image/doubleroom.jpg" class="room-image" alt="Double room"/>
+                                <img id="roomImage" src="image<%# Eval("Room_Image_Path") %>" class="room-image" alt="Double room"/>
                             </div>
                             <div class="room-name--section">
                                 <div style="display: flex; flex-direction: column;">

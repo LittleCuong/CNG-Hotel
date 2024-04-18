@@ -184,6 +184,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="Account\AddPhoneNumber.aspx" />
+    <Content Include="Account\AdminPage.aspx" />
     <Content Include="Account\Confirm.aspx" />
     <Content Include="Account\Forgot.aspx" />
     <Content Include="Account\Lockout.aspx" />
@@ -191,6 +192,7 @@
     <Content Include="Account\Manage.aspx" />
     <Content Include="Account\ManageLogins.aspx" />
     <Content Include="Account\ManagePassword.aspx" />
+    <Content Include="Account\MyReservation.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\PlaceRoom.aspx" />
     <Content Include="Account\Register.aspx" />
@@ -214,9 +216,24 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="image\background.jpg" />
     <Content Include="image\beach_background.jpg" />
+    <Content Include="image\BlissfulDuets.jpg" />
+    <Content Include="image\Couple%27sCove.jpg" />
+    <Content Include="image\CozyHaven.jpg" />
     <Content Include="image\default_background.jpg" />
     <Content Include="image\doubleroom.jpg" />
+    <Content Include="image\DuoOasis.jpg" />
+    <Content Include="image\GrandLuxeSuite.jpg" />
+    <Content Include="image\HarmonyHideaway.jpg" />
+    <Content Include="image\ImperialSuite.jpg" />
+    <Content Include="image\LuxeHaven.jpg" />
+    <Content Include="image\MajesticManorSuite.jpg" />
     <Content Include="image\new_background.jpg" />
+    <Content Include="image\PairParadise.jpg" />
+    <Content Include="image\RegalResidency.jpg" />
+    <Content Include="image\SereneHideaway.jpg" />
+    <Content Include="image\SoloRetreat.jpg" />
+    <Content Include="image\SoloSuite.jpg" />
+    <Content Include="image\TranquilOasis.jpg" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -275,6 +292,13 @@
     <Compile Include="Account\AddPhoneNumber.aspx.designer.cs">
       <DependentUpon>AddPhoneNumber.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\AdminPage.aspx.cs">
+      <DependentUpon>AdminPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\AdminPage.aspx.designer.cs">
+      <DependentUpon>AdminPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\Confirm.aspx.cs">
       <DependentUpon>Confirm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -323,6 +347,13 @@
     </Compile>
     <Compile Include="Account\ManagePassword.aspx.designer.cs">
       <DependentUpon>ManagePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\MyReservation.aspx.cs">
+      <DependentUpon>MyReservation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\MyReservation.aspx.designer.cs">
+      <DependentUpon>MyReservation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\OpenAuthProviders.ascx.cs">
       <DependentUpon>OpenAuthProviders.ascx</DependentUpon>

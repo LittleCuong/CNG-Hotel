@@ -11,15 +11,25 @@
             <div class="col-md-12">   
                 <h2 style="font-size: 22px; text-align: center; font-weight: 400;">Sign up to CNG Hotel</h2>
                 <section class="register-section">
-                    <div class="register-container">                     
+                    <div class="register-container" style="display: flex; flex-direction: column; height: 100%; padding: 30px 25px; box-shadow: 0 5px 30px rgba(80, 57, 24, 0.15); border-radius: 8px;">                     
                         <asp:ValidationSummary runat="server" CssClass="text-danger" />
                         <div class="form-group">
                             <div class="input-container">
-                                <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-12 control-label">Email</asp:Label>
+                                <asp:Label runat="server" AssociatedControlID="Name" CssClass="col-md-12 control-label">User name</asp:Label>
                                 <div class="col-md-12">
-                                    <asp:TextBox runat="server" ID="Email" CssClass="form-control input-custom" TextMode="Email" />
-                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
-                                        CssClass="text-danger" ErrorMessage="The email field is required." />
+                                    <asp:TextBox runat="server" ID="Name" CssClass="form-control input-custom" TextMode="SingleLine" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="Name"
+                                        CssClass="text-danger" ErrorMessage="The user name field is required." />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-container">
+                                <asp:Label runat="server" AssociatedControlID="Phone" CssClass="col-md-12 control-label">Phone Number</asp:Label>
+                                <div class="col-md-12">
+                                    <asp:TextBox runat="server" ID="Phone" CssClass="form-control input-custom" TextMode="Phone" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="Phone"
+                                        CssClass="text-danger" ErrorMessage="The phone number field is required." />
                                 </div>
                             </div>
                         </div>
@@ -40,14 +50,14 @@
                                     <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" CssClass="form-control input-custom" />
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmPassword"
                                         CssClass="text-danger" Display="Dynamic" ErrorMessage="The confirm password field is required." />
-                                    <asp:CompareValidator runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword"
-                                        CssClass="text-danger" Display="Dynamic" ErrorMessage="The password and confirmation password do not match." />
+                                    <asp:CompareValidator ID="ComparePassword" runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword"
+                                        CssClass="text-danger" Display="Dynamic" ErrorMessage="Password do not match!" />
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="margin-top: 12px;">
                             <div class="col-md-12">
-                                <asp:Button runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="btn-custom login-btn" />
+                                <asp:Button runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="default-btn" style="width: 100%"/>
                             </div>
                         </div>
                     </div>                               
@@ -55,4 +65,9 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+
+    </script>
 </asp:Content>

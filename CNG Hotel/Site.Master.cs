@@ -7,6 +7,8 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace CNG_Hotel
 {
@@ -15,6 +17,8 @@ namespace CNG_Hotel
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
+
+        public object ClientScript { get; private set; }
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -71,7 +75,7 @@ namespace CNG_Hotel
         {
 
             if (Request.Cookies["id"] != null)
-            {
+            {       
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "Your Comment", "handleCheckLogIn();", true);            
                 System.Diagnostics.Debug.WriteLine("Logged in");              
             }
@@ -87,9 +91,23 @@ namespace CNG_Hotel
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
 
-        private void GetUser(int userId)
+        private DataTable GetUser()
         {
-
+            DataTable table = new DataTable();
+            try
+            {
+                clsDatabase.OpenConnection();
+                SqlCommand command = new SqlCommand("select User_Name from Users where User_ID = @ID;", clsDatabase.connection);
+                command.Parameters.AddWithValue("@ID", Request.Cookies["id"]);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                clsDatabase.CloseConnection();
+                adapter.Fill(table);
+            }
+            catch (Exception)
+            {
+                System.Diagnostics.Debug.WriteLine("Get data failed");
+            }
+            return table;
         }
     }
 
