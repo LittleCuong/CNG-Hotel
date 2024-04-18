@@ -13,53 +13,16 @@ namespace CNG_Hotel.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //RegisterHyperLink.NavigateUrl = "Register";
-            // Enable this once you have account confirmation enabled for password reset functionality
-            // ForgotPasswordHyperLink.NavigateUrl = "Forgot";
-            // OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
             var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
-            //if (!String.IsNullOrEmpty(returnUrl))
-            //{
-            //    RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
-            //}
         }
 
+        // Method log in
         protected void LogIn(object sender, EventArgs e)
         {
+            // Lấy value của Number và Password truyền vào hàm check thông tin
             string phone = Number.Text;
             string password = Password.Text;
             IsValidUser(phone, password);
-            //if (IsValid)
-            //{
-            //    // Validate the user password
-            //    var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            //    var signinManager = Context.GetOwinContext().GetUserManager<ApplicationSignInManager>();
-
-            //    // This doen't count login failures towards account lockout
-            //    // To enable password failures to trigger lockout, change to shouldLockout: true
-            //    var result = signinManager.PasswordSignIn(Number.Text, Password.Text, RememberMe.Checked, shouldLockout: false);
-
-            //    switch (result)
-            //    {
-            //        case SignInStatus.Success:
-            //            IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-            //            break;
-            //        case SignInStatus.LockedOut:
-            //            Response.Redirect("/Account/Lockout");
-            //            break;
-            //        case SignInStatus.RequiresVerification:
-            //            Response.Redirect(String.Format("/Account/TwoFactorAuthenticationSignIn?ReturnUrl={0}&RememberMe={1}", 
-            //                                            Request.QueryString["ReturnUrl"],
-            //                                            RememberMe.Checked),
-            //                              true);
-            //            break;
-            //        case SignInStatus.Failure:
-            //        default:
-            //            FailureText.Text = "Invalid login attempt";
-            //            ErrorMessage.Visible = true;
-            //            break;
-            //    }
-            //}
         }
 
         private void IsValidUser(string phoneNumber, string password)
@@ -73,20 +36,28 @@ namespace CNG_Hotel.Account
                 command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
                 command.Parameters.AddWithValue("@Password", password);
 
+                // Đọc dữ liệu và truy vấn
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
                  
+                    // Lấy user id và user role từ kết quả  => Lấy kết quả dưới dạng số nguyên 32 bit
+                    // lấy id ở cột đầu tiên trong kết quả
                     int userId = reader.GetInt32(0);
+
+                    // lấy user role trong cột thứ 2
                     int userRole = reader.GetInt32(1);
                
+                    // Gán cookie cho trình duyệt là user id để kiểm tra xem người dùng có đăng nhập hay chưa
                     HttpCookie userIdCookie = new HttpCookie("id", userId.ToString());
                     Response.Cookies.Add(userIdCookie);
                  
+                    // Nếu user role = 1 => admin => dẫn đến trang admin
                     if (userRole == 1)
                     {
                         Response.Redirect("/Account/AdminPage.aspx");
                     }
+                    // không thì chuyển sang trang chủ cho khách hàng
                     else if (userRole == 2)
                     {
                         Response.Redirect("/Default.aspx");
